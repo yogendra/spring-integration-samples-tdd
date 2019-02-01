@@ -20,14 +20,14 @@ cd spring-integration-samples-tdd
  
 ### Step 01: Basic Message Related Operations
 
-Code: [src/test/java/me/yogendra/samples/springintegrationsamples/Step01BasicTests.java]()
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step01BasicTests.java)
 
 This shows how to create messages and add headers.
 
 
 ### Step 02: Build Pattern for Message
 
-Code: [src/test/java/me/yogendra/samples/springintegrationsamples/Step02MessageBuilder.java]()
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step02MessageBuilderTest.java)
 
 This shows how to use MessageBuilder to create messages. 
 
