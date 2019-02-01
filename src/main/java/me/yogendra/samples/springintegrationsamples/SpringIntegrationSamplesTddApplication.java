@@ -4,11 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringIntegrationSamplesTDDApplication {
+public class SpringIntegrationSamplesTddApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringIntegrationSamplesTDDApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(SpringIntegrationSamplesTddApplication.class, args);
+  }
 
 }
 
