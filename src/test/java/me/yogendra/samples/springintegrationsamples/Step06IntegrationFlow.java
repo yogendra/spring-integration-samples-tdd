@@ -1,22 +1,18 @@
 package me.yogendra.samples.springintegrationsamples;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static me.yogendra.samples.springintegrationsamples.TestData.message;
+import static me.yogendra.samples.springintegrationsamples.TestData.verifyMessagePayload;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,14 +20,26 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration
-public class Step03IntegrationFlow {
+public class Step06IntegrationFlow {
 
   @Autowired
-  private ByteArrayOutputStream bytes;
-
-  @Autowired
+  @Qualifier("inputChannel")
   private MessageChannel inputChannel;
 
+  @Autowired
+  @Qualifier("outputChannel")
+  private DirectChannel outputChannel;
+
+  @Test
+  public void shouldPostToIntegration() {
+    String input = "some text";
+    String expected = "SOME TEXT";
+    Message<?> message = message(input);
+
+    outputChannel.subscribe(x -> verifyMessagePayload(x, expected));
+    inputChannel.send(message);
+
+  }
 
   @Configuration
   @EnableIntegration
@@ -39,13 +47,15 @@ public class Step03IntegrationFlow {
 
     @Bean
     public IntegrationFlow myFlow() {
-      return IntegrationFlows
-          .from(inputChannel())
-          .log()
+      return IntegrationFlows.from(inputChannel())
           .transform(String.class, String::toUpperCase)
-          .log()
-          .handle(printer()::print)
+          .channel(outputChannel())
           .get();
+    }
+
+    @Bean
+    public DirectChannel outputChannel() {
+      return new DirectChannel();
     }
 
     @Bean
@@ -53,31 +63,7 @@ public class Step03IntegrationFlow {
       return new DirectChannel();
     }
 
-    @Bean
-    public MessagePrintService printer() {
-      return new MessagePrintService(new PrintStream(outputStream()));
-    }
-
-    @Bean
-    public ByteArrayOutputStream outputStream() {
-      return new ByteArrayOutputStream();
-    }
-
   }
 
-  @Test
-  public void shouldPostToIntegration() {
-
-    Message<?> message = MessageBuilder.withPayload("Hello, World!")
-        .setHeader("key", "value")
-        .build();
-
-    inputChannel.send(message);
-
-    String output = new String(bytes.toByteArray());
-    assertThat(output, containsString("HELLO, WORLD!"));
-
-
-  }
 
 }

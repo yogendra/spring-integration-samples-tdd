@@ -32,6 +32,15 @@ This shows how to create messages and add headers.
 This shows how to use MessageBuilder to create messages. 
 
 
+### Step 03: Connect Via Channels
+
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step03ConnectViaChannelTest.java)
+
+* Create a Channel
+* Send Message to channel
+* Check message structure received over channel
+
+
 ### Step 03: Create IntegrationFlow
 
 [Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step03IntegrationFlow.java)

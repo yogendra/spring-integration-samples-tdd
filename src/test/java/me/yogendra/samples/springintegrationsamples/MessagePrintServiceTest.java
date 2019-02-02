@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 
+
 public class MessagePrintServiceTest {
 
   private MessagePrintService printer;
