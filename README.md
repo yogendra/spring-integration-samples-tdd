@@ -34,6 +34,13 @@ This shows how to use MessageBuilder to create messages.
 
 ### Step 03: Create IntegrationFlow
 
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step03IntegrationFlow.java)
+
+* Create a new channel
+* Create a new Integration Flow using IntegrationFlows class
+* Send message to input channel
+* Verify that message has reached print service
+
 
 ### Step 04: Subflow
 
