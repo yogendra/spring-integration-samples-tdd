@@ -1,17 +1,18 @@
 package me.yogendra.samples.springintegrationsamples;
 
-import static me.yogendra.samples.springintegrationsamples.TestData.testMessage;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.Gateway;
+import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.config.EnableIntegration;
-import org.springframework.messaging.Message;
-import org.springframework.stereotype.Component;
+import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,24 +21,37 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class Step07GatewayTest {
 
   @Autowired
-  GreetingGateway greetingGateway;
+  private GreetingGateway greetingGateway;
 
   @Test
-  public void shouldSendMessageViaGateway(){
-    Message<String> message = testMessage();
+  public void shouldSendMessageViaGateway() {
+
+    String input = "This is a message";
+    String expected = "THIS IS A MESSAGE";
+    String output = greetingGateway.greet(input);
+    assertThat(output, is(expected));
+
+
   }
 
-  @Component
   @MessagingGateway
-  public interface GreetingGateway{
-    @Gateway
+  public interface GreetingGateway {
+
+    @Gateway(requestChannel = "greeting.input")
     String greet(String subject);
   }
 
   @Configuration
   @EnableIntegration
-  @ComponentScan
-  public static class TestConfiguration{
+  @IntegrationComponentScan
+  public static class TestConfiguration {
+
+    @Bean
+    public IntegrationFlow greeting() {
+      return f -> f.<String, String>transform(String::toUpperCase);
+
+    }
+
   }
 
 }

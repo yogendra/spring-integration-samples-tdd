@@ -18,19 +18,20 @@ cd spring-integration-samples-tdd
 ```
 ## Samples
  
-### Step 01: Basic Message Related Operations
+### Step 01: Basic Message
 
 [Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step01BasicTests.java)
 
-This shows how to create messages and add headers.
+* Create Message
+* Add header fields
+* Examine ID and timsamp in message header
 
 
-### Step 02: Build Pattern for Message
+### Step 02: Use Message Builder to create Message
 
 [Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step02MessageBuilderTest.java)
 
 This shows how to use MessageBuilder to create messages. 
-
 
 ### Step 03: Connect Via Channels
 
@@ -41,18 +42,37 @@ This shows how to use MessageBuilder to create messages.
 * Check message structure received over channel
 
 
-### Step 03: Create IntegrationFlow
+### Step 04: Service Activator
 
-[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step03IntegrationFlow.java)
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step04ServiceActivatorTest.java)
 
-* Create a new channel
-* Create a new Integration Flow using IntegrationFlows class
-* Send message to input channel
-* Verify that message has reached print service
+* Create your own service
+* Attach service to a channel
+* Send message over the channel
 
+### Step 05: Send Response from Service
 
-### Step 04: Subflow
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step05ServiceActivatorWithResponseTest.java)
 
+* Receive a message in your service 
+* Create a new message and return
+* Receive mesasge via output channel
+
+### Step 06: Create IntegrationFlow
+
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step06IntegrationFlow.java)
+
+* Create Integration flow
+* Send message over the input channel
+* Verify message received over output channel
+
+### Step 07: Gateway
+
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step07GatewayTest.java)
+
+* Create a Gateway interface
+* Create Integration flow
+* Attach Integration flow to Gateway via channel
 
 
  
