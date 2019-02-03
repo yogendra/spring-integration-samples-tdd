@@ -74,5 +74,30 @@ This shows how to use MessageBuilder to create messages.
 * Create Integration flow
 * Attach Integration flow to Gateway via channel
 
+### Step 08: Gateway with Multiple FLows
+
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step08GatewayMultipleFlowsTest.java)
+
+* Create a Gateway interface with multiple gateway interfaces
+* Create multiple flows to attach to gateways
+* Send request and check response
+
+
+### Step 10: Subflows using publish and subscribe 
+
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step09SubflowViaPublishSubscribeTest.java)
+
+* Create gateway interface
+* Create flow with `publishSubscribe`
+* Setup subscription to subflows
+
+### Step 10: Routing to Recipient
+
+[Code](src/test/java/me/yogendra/samples/springintegrationsamples/Step10RouteToRecipientTest.java)
+
+* Create gateway interface
+* Create flow with recipient routing
+* Create recipients that selection and destination queue
+
 
  
