@@ -35,7 +35,7 @@ public class Step07GatewayTest {
   }
 
   @MessagingGateway
-  public interface GreetingGateway {
+  interface GreetingGateway {
 
     @Gateway(requestChannel = "greeting.input")
     String greet(String subject);
